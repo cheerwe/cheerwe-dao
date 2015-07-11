@@ -1,0 +1,21 @@
+{
+    "name": "cheerwe-dao",
+    "version": "1.0.2",
+    "main": "index.js",
+    "description": "a framework about mysql dao",
+    "homepage": "https://github.com/xshong2008/cheerwe-dao/",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/xshong2008/cheerwe-dao"
+    },
+    "keyword": ["cheerwe", "dao ", "mysql ", "uuid "],
+    "dependencies": {
+        "mysql": "*",
+        "node-uuid": "*",
+        "cheerwe-util": "1.*"
+    },
+    "author": {
+        "name": "xshong2008",
+        "email": "cheerwe@126.com"
+    }
+}

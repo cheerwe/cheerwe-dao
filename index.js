@@ -6,8 +6,9 @@ var DBHelper = require('./src/db-helper');
  * @param  {[type]} dbconfig [description]
  * @return {[type]}          [description]
  */
-DAO.init = function(dbconfig) {
+DAO.init = function(dbconfig, isDev) {
     DBHelper.getConnection(dbconfig);
+    DAO.isDev = isDev;
 };
 
 

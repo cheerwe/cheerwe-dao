@@ -34,3 +34,8 @@ module.exports.getConnection = function(config) {
 
     return connection;
 };
+
+
+module.exports.endConnection = function() {
+    return;
+};

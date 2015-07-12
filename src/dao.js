@@ -19,6 +19,12 @@ var DAO = function(config) {
     Util.apply(this, config);
 };
 
+DAO.log = function() {
+    if (DAO.isDev) {
+        console.log.apply(console, arguments);
+    }
+}
+
 var daoPrototype = {
     dbHelper: dbHelper,
     pkField: 'id',
@@ -77,7 +83,9 @@ var daoPrototype = {
             callback && callback(err, ret);
         });
 
-        dbHelper.endConnection(conn, query);
+        DAO.log(query.sql);
+        return query;
+        // dbHelper.endConnection(conn, query);
     },
     getConditionStr: function(condition) {
         if (!condition) {
@@ -138,7 +146,10 @@ var daoPrototype = {
         var conn = dbHelper.getConnection(),
             query = conn.query(sql.join(' '), callback);
 
-        dbHelper.endConnection(conn, query);
+        DAO.log(query.sql);
+        return query;
+
+        // dbHelper.endConnection(conn, query);
         // console.log(query.sql);
     },
     /**
@@ -189,15 +200,18 @@ var daoPrototype = {
                 }
             });
 
-        dbHelper.endConnection(conn, query);
+        DAO.log(query.sql);
+        return query;
 
+
+        // dbHelper.endConnection(conn, query);
         // console.log(sqlList);
     },
     save: function(mode, callback) {
         if (mode[this.pkField]) {
-            this.edit(mode, callback);
+            return this.edit(mode, callback);
         } else {
-            this.add(mode, callback);
+            return this.add(mode, callback);
         }
     },
     add: function(mode, callback) {
@@ -214,8 +228,10 @@ var daoPrototype = {
                     }
                 }
             });
-        dbHelper.endConnection(conn, query);
+        DAO.log(query.sql);
+        return query;
 
+        // dbHelper.endConnection(conn, query);
         //      console.log(query.sql);
     },
     edit: function(mode, callback) {
@@ -232,7 +248,10 @@ var daoPrototype = {
                 }
             });
 
-        dbHelper.endConnection(conn, query);
+        DAO.log(query.sql);
+        return query;
+
+        // dbHelper.endConnection(conn, query);
 
         //      console.log(query.sql);
     },
@@ -249,7 +268,10 @@ var daoPrototype = {
                 }
             });
 
-        dbHelper.endConnection(conn, query);
+        DAO.log(query.sql);
+        return query;
+
+        // dbHelper.endConnection(conn, query);
         // console.log(query.sql);
     },
     del: function(ids, callback) {
@@ -265,10 +287,11 @@ var daoPrototype = {
                     }
                 }
             });
-        console.log(sql);
+        DAO.log(query.sql);
+        return query;
 
-        dbHelper.endConnection(conn, query);
-        console.log(query.sql);
+        // console.log(sql);
+        // dbHelper.endConnection(conn, query);
     },
     getListIn: function(ids, callback) {
         var sql = Util.format(SQL.SELECT_IN, this.tableName);
@@ -285,10 +308,13 @@ var daoPrototype = {
                     }
                 }
             });
-        dbHelper.endConnection(conn, query);
+
+        DAO.log(query.sql);
+        return query;
+
+        // dbHelper.endConnection(conn, query);
     }
 }
-
 
 
 

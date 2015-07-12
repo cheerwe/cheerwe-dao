@@ -6,6 +6,7 @@
 
 
 ## 初始化
+
 ‘’‘
 
 var WeDao=require('cheerwe-dao');

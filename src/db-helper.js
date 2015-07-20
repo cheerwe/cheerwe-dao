@@ -14,13 +14,13 @@ module.exports.getConnection = function(config) {
 
     connection = mysql.createConnection(config || dbConfig);
 
+    dbConfig = config;
+
     connection.connect(function(err) {
         if (err) {
             console.log("SQL CONNECT ERROR: " + err);
         } else {
             console.log("SQL CONNECT SUCCESSFUL.");
-
-            dbConfig = config;
         }
     });
 

@@ -313,6 +313,29 @@ var daoPrototype = {
         return query;
 
         // dbHelper.endConnection(conn, query);
+    },
+    addList: function(modeList, callback) {
+        this.saveList(modeList, 'ADD', callback);
+    },
+    updateList: function(modeList, callback) {
+        this.saveList(modeList, 'UPDATE', callback);
+    },
+    saveList: function(modeList, type, callback) {
+        var sqlTpl = SQL[type];
+        var sqlList = [];
+        var pkField = this.pkField;
+        var tableName = this.tableName;
+
+        modeList.forEach(function(item) {
+            item[pkField] = item[pkField] || nodeUUID.v1();
+            var sql = mysql.format(sqlTpl, [tableName, item, pkField, item[pkField]]);
+            sqlList.push(sql);
+        });
+
+        this.doTransaction(sqlList, function(err, ret) {
+            callback(err, err ? false : true);
+        });
+        DAO.log(sqlList);
     }
 }
 

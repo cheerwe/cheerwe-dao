@@ -1,20 +1,17 @@
 var mysql = require('mysql');
-var dbConfig = null;
 var connection = null;
 
 /**
- * 获取链接
+ * 获取数据库连接
  * @param  {[type]} config [description]
  * @return {[type]}        [description]
  */
-module.exports.getConnection = function(config) {
+module.exports.getConnection = function() {
     if ((connection) && (connection._socket) && (connection._socket.readable) && (connection._socket.writable)) {
         return connection;
     }
 
-    connection = mysql.createConnection(config || dbConfig);
-
-    dbConfig = config;
+    connection = mysql.createConnection(this.dbConfig);
 
     connection.connect(function(err) {
         if (err) {
@@ -35,6 +32,16 @@ module.exports.getConnection = function(config) {
     return connection;
 };
 
+/**
+ * 初始化数据库连接
+ * @param  {[type]} config [description]
+ * @return {[type]}        [description]
+ */
+module.exports.initConnection = function(config) {
+    this.dbConfig = config;
+
+    this.getConnection();
+};
 
 module.exports.endConnection = function() {
     return;

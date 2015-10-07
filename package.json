@@ -1,6 +1,6 @@
 {
     "name": "cheerwe-dao",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "main": "index.js",
     "description": "a framework about mysql dao",
     "homepage": "https://github.com/cheerwe/cheerwe-dao/",

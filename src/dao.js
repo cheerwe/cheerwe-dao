@@ -23,7 +23,7 @@ DAO.log = function() {
     if (DAO.isDev) {
         console.log.apply(console, arguments);
     }
-}
+};
 
 var daoPrototype = {
     dbHelper: dbHelper,
